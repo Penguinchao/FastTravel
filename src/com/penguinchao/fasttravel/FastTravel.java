@@ -83,6 +83,7 @@ public class FastTravel extends JavaPlugin implements Listener {
 	}
 	@EventHandler
 	public void onRegionEnter(RegionEnterEvent event){
+		debugTrace("[onRegionEnter]");
 		String regionName = event.getRegion().getId();
 		debugTrace("[onRegionEnter] A region was entered: "+regionName);
 		if(regionTools.isRegionDefined(regionName)){

@@ -20,7 +20,7 @@ public class RegionTools {
 	}
 	protected void discoverRegion(String regionName, UUID player){
 		//Mark a region as discovered for a player
-		String query = "INSERT INTO `"+main.sql.getPrefix()+"discoveredlocations` (`player_id`, `region`) VALUES ('playid', 'regionnames')";
+		String query = "INSERT INTO `"+main.sql.getPrefix()+"discoveredlocations` (`player_id`, `region`) VALUES ('"+player.toString()+"', '"+regionName+"')";
 		PreparedStatement statement;
 		try {
 			statement = main.sql.getConnection().prepareStatement(query);
@@ -42,6 +42,10 @@ public class RegionTools {
 			discoveredLocations = getDiscoveredLocations(player);
 		} catch (SQLException e) {
 			e.printStackTrace();
+			return false;
+		}
+		if(discoveredLocations == null){
+			main.debugTrace("[isRegionDiscovered] Discovered locations is null");
 			return false;
 		}
 		for(String loc : discoveredLocations){
@@ -68,6 +72,10 @@ public class RegionTools {
 			results = statement.executeQuery();
 		} catch (SQLException e) {
 			e.printStackTrace();
+			return null;
+		}
+		if(results == null){
+			main.debugTrace("[getDiscoveredLocations] Results are null");
 			return null;
 		}
 		Set<String> returnMe = null;
@@ -102,10 +110,14 @@ public class RegionTools {
 		//Check if a region is a fast travel one
 		main.debugTrace("[isRegionDefined] Checking if "+regionName+" is defined");
 		ConfigurationSection sections = main.getConfig().getConfigurationSection("locations");
+		if(sections == null){
+			main.debugTrace("[isRegionDefined] ConfigurationSection is null");
+			return false;
+		}
 		Set<String> keys = sections.getKeys(false);
 		for(String key : keys){
 			main.debugTrace("[isRegionDefined] Checking "+key);
-			if(regionName == key){
+			if(regionName.equals(key)){
 				main.debugTrace("[isRegionDefined] Region found");
 				main.debugTrace("[isRegionDefined] Done");
 				return true;
