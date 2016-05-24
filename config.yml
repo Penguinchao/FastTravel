@@ -1,0 +1,29 @@
+#Debug
+debug-enabled: false
+#Database
+mysqlHostName: localhost
+mysqlPort: 3306
+mysqlUsername: root
+mysqlPassword: ''
+mysqlDatabase: fasttravel
+mysqlPrefix: fasttravel
+#Defined Locations
+locations:
+  myhome:
+    world: world
+    x: 0
+    y: 0
+    z: 0
+    pitch: 0
+    yaw: 0
+    display-name: My House
+#Stored Messages
+messages:
+  discovered: You have discovered %s
+  not-discovered: You have not discovered that location yet
+  no-locations: You have not discovered any locations yet
+  world-null: That location does not exist
+  invalid-location: That location does not exist
+  incorrect-syntax: Correct syntax /travel [location]sd
+  on-travel: You have traveled to %s
+  internal-error: Fast travel is unavailable right now. Please contact an Administrator

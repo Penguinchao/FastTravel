@@ -1,0 +1,9 @@
+main: com.penguinchao.fasttravel.FastTravel
+version: 1.0
+name: FastTravel
+author: Penguinchao
+depend: [WGRegionEvents, WorldGuard]
+commands:
+    travel:
+        description: Teleport to a discovered location
+        aliases: [tr]
